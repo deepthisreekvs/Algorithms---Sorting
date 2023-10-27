@@ -1,0 +1,53 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'countingSort' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+# Define a function called countingSort that takes an input list 'arr'.
+def countingSort(arr):
+    # Create a list 'ans' of length 100, initialized with zeros.
+    ans = [0 for i in range(100)]
+
+    # Iterate through each element 'i' in the input list 'arr'.
+    for i in arr:
+        # Increment the value at the index 'i' in the 'ans' list.
+        ans[i] += 1
+
+    # Return the 'ans' list, which now contains the count of each element.
+    return ans
+
+# The code below is an alternative method to perform counting sort, also working for all test cases.
+# Uncomment and use this code instead of the previous one if needed.
+
+# Initialize a list 'index_sort' with 100 elements, all set to 0.
+# index_sort = [0] * 100
+# for i in arr:
+#     # Increment the value at the index 'i' in the 'index_sort' list.
+#     index_sort[i] += 1
+# Return the 'index_sort' list, which now contains the count of each element using an alternative method.
+# return index_sort
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = countingSort(arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
