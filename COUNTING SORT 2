@@ -1,0 +1,90 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'countingSort' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def countingSort(arr):
+    # Write your code here
+    
+    #this code we will execute in 3 ways
+    
+    #first way
+
+    # Sort the input array in ascending order
+    # arr.sort()
+
+    # Return the sorted array
+    # return arr
+    
+    #second way
+
+    # Find the maximum value in the input array
+    # mval = max(arr)
+
+    # Initialize a list 'count' with zeros, where each element corresponds to the count of a value in 'arr'
+    # count = [0] * (mval + 1)
+
+    # Iterate through 'arr' and increment the count for each value
+    # for i in arr:
+    #     count[i] += 1
+
+    # Create an empty list 'arr1'
+    # arr1 = []
+
+    # Iterate through 'count', and for each value, extend 'arr1' with the corresponding value multiplied by its count
+    # for j in range(mval + 1):
+    #     arr1.extend([j] * count[j])
+
+    # Return the sorted 'arr1'
+    # return arr1
+    
+    #Third way
+
+    # Initialize a list 'index_sort' with 100 zeros, where each element corresponds to the count of a value in 'arr'
+    index_sort = [0] * 100
+
+    # Iterate through 'arr', increment the count for each value in 'index_sort'
+    for k in arr:
+        index_sort[k] +=  1
+
+    # Initialize 'j' to keep track of the position in 'arr'
+    j = 0
+
+    # Iterate through 'index_sort'
+    for i in range(len(index_sort)):
+
+        # If the count for a value is greater than 0, set 'temp' to that count
+        if index_sort[i] > 0:
+            temp = index_sort[i]
+
+            # For each occurrence of the value, update 'arr' and increment 'j'
+            for _ in range(temp):
+                arr[j] = i
+                j += 1
+
+    # Return the sorted 'arr'
+    return arr
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = countingSort(arr)
+
+    fptr.write(' '.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
