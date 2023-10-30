@@ -1,0 +1,42 @@
+#!/bin/python3  # Shebang line, specifies the interpreter to use for this script
+
+import math  # Import the math module for mathematical operations
+import os  # Import the os module for operating system-related functions
+import random  # Import the random module for generating random numbers
+import re  # Import the re module for regular expressions
+import sys  # Import the sys module for system-specific parameters and functions
+
+#written code here too
+# Define a function 'minimaldifference' to find the minimal absolute difference in an array
+def minimaldifference(arr):
+    minimal = abs(arr[0] - arr[1])  # Initialize 'minimal' with the absolute difference of the first two elements
+    for i in range(1, len(arr) - 1):  # Iterate through the array
+        absValue = abs(arr[i] - arr[i + 1])  # Calculate the absolute difference between consecutive elements
+        if absValue < minimal:  # Check if the absolute difference is smaller than the current minimal
+            minimal = absValue  # Update 'minimal' if a smaller difference is found
+    return minimal  # Return the minimal absolute difference
+
+# Define a function 'closestNumbers' to find pairs of elements with the minimal absolute difference
+def closestNumbers(arr):
+    sorted_arr = sorted(arr)  # Create a sorted version of the input array
+    result = []  # Initialize an empty list to store the pairs with minimal absolute difference
+    minimalDiff = minimaldifference(sorted_arr)  # Find the minimal absolute difference
+    for i in range(len(arr) - 1):  # Iterate through the sorted array
+        if abs(sorted_arr[i] - sorted_arr[i + 1]) == minimalDiff:  # Check if the absolute difference is equal to minimalDiff
+            result.append(sorted_arr[i])  # Add the first element of the pair to the result list
+            result.append(sorted_arr[i + 1])  # Add the second element of the pair to the result list
+    return result  # Return the list of pairs with minimal absolute difference
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')  # Open a file for writing the output
+
+    n = int(input().strip())  # Read an integer 'n' from the input
+
+    arr = list(map(int, input().rstrip().split()))  # Read a list of integers and store them in 'arr'
+
+    result = closestNumbers(arr)  # Call the 'closestNumbers' function to find the pairs
+
+    fptr.write(' '.join(map(str, result))  # Write the result as a space-separated string to the output file
+    fptr.write('\n')  # Write a newline character to the output file
+
+    fptr.close()  # Close the output file
